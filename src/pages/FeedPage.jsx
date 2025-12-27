@@ -3,7 +3,7 @@ import IncidentCard from "../components/IncidentCard";
 import FilterPanel from "../components/FilterPanel";
 import IncidentMap from "../components/IncidentMap";
 import { getIncidents } from "../services/api";
-
+import './feed.css'
 const FeedPage = () => {
   const [incidents, setIncidents] = useState([]);
   const [filteredIncidents, setFilteredIncidents] = useState([]);
@@ -48,23 +48,27 @@ const FeedPage = () => {
   };
 
   return (
-    <div>
-      <h1>Live Incident Feed</h1>
+    <div className="feed-page">
+  <h1>Live Incident Feed</h1>
 
+  <div className="top-container">
+    <div className="filter-panel-container">
       <FilterPanel onFilter={handleFilter} />
-
-      <div style={{ display: "flex", gap: "20px" }}>
-        <div style={{ flex: 1 }}>
-          {filteredIncidents.map((incident) => (
-            <IncidentCard key={incident._id} incident={incident} />
-          ))}
-        </div>
-
-        <div style={{ flex: 1 }}>
-          <IncidentMap incidents={filteredIncidents} />
-        </div>
-      </div>
     </div>
+
+    <div className="map-container">
+      <IncidentMap incidents={filteredIncidents} />
+    </div>
+  </div>
+
+  <div className="incident-list">
+    {filteredIncidents.map((incident) => (
+      <IncidentCard key={incident._id} incident={incident} />
+    ))}
+  </div>
+</div>
+
+
   );
 };
 

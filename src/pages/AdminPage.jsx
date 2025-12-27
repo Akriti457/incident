@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './admin.css'
 import { getIncidents, updateIncidentStatus } from "../services/api";
 import FilterPanel from "../components/FilterPanel";
 import StatusBadge from "../components/StatusBadge";
@@ -64,13 +65,13 @@ const AdminPage = () => {
   };
 
   return (
-    <div>
+    <div className="admin-page">
       <h1>Admin Dashboard</h1>
 
       <FilterPanel onFilter={handleFilter} />
 
       {filteredIncidents.map((incident) => (
-        <div key={incident._id} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px", borderRadius: "5px" }}>
+        <div key={incident._id} className="incident-card" >
           <h3>{incident.type}</h3>
           <p>{incident.description.length > 100 ? incident.description.slice(0, 100) + "..." : incident.description}</p>
           <p>Severity: {incident.severity}</p>
