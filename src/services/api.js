@@ -29,3 +29,7 @@ export const updateIncidentStatus = async (id, status, notes) => {
   });
   return response.data;
 };
+export const createContact = async (data) => {
+  const response = await axios.post(`${API_URL}/contacts`, data);
+  return response.data;
+};

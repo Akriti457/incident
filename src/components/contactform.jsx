@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { createContact } from "../services/api";
 import './contactform.css'
 const ContactForm = ({ onSuccess }) => {
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!name || !mobile) {
@@ -12,11 +13,17 @@ const ContactForm = ({ onSuccess }) => {
       return;
     }
 
-    // You can later send this to backend
-    console.log({ name, mobile });
+   try {
+    // Send contact info to backend
+    await createContact({ name, mobile });
 
-    // MARK USER AS VALID
+    // Success: mark user as valid
     onSuccess();
+  } catch (error) {
+    console.error("Error saving contact:", error);
+    alert("Failed to save contact. Try again.");
+  }
+   
   };
 
   return (
